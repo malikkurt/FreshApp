@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_signout"
+        android:title="Oturumu kapat"
+        android:actionLayout=""
+        app:showAsAction="never" />
+    <item android:title="Satış ekle"
+        android:id="AddList"/>
+    <item android:title="Ayarlar"
+        android:id="Settings"/>
+</menu>
