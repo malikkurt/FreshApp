@@ -67,11 +67,11 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
 
             if(task.isSuccessful()){
-                Toast.makeText(getApplicationContext(),"Deneme 2",Toast.LENGTH_SHORT).show();
                 String user_id = mAuth.getCurrentUser().getUid();
                 mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
                 HashMap<String,String> userMap = new HashMap<>();
                 userMap.put("name",name);
+                userMap.put("Email",email);
                 userMap.put("phone",phone);
 
                 mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -79,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
 
                         if(task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(),"Deneme 3",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Kayıt Başarılı",Toast.LENGTH_SHORT).show();
                             Intent mainIntent=new Intent(RegisterActivity.this, MainActivity.class);
                             startActivity(mainIntent);
                         }
