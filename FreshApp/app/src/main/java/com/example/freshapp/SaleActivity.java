@@ -2,11 +2,15 @@ package com.example.freshapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +27,9 @@ public class SaleActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     FirebaseDatabase database;
 
+
+
+
     MyAdapter adapter;
 
     @Override
@@ -38,11 +45,13 @@ public class SaleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sale);
 
+
+
         recyclerView = findViewById(R.id.recycleview);
 
         database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("sales");
-        //databaseReference = FirebaseDatabase.getInstance().getReference("sales");
+        databaseReference = database.getReference("Sales");
+
         list = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyAdapter(this, list);
@@ -53,8 +62,9 @@ public class SaleActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    Sales user = dataSnapshot.getValue(Sales.class);
-                    list.add(user);
+                    Sales item = dataSnapshot.getValue(Sales.class);
+                    list.add(item);
+
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -64,6 +74,7 @@ public class SaleActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
 
 
     }

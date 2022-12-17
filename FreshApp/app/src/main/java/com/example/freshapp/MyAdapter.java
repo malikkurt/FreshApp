@@ -1,9 +1,12 @@
 package com.example.freshapp;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,7 +16,7 @@ import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
-    Context context;
+    static Context context;
     ArrayList<Sales> list;
 
     public MyAdapter(Context context, ArrayList<Sales> list) {
@@ -45,6 +48,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView city,type,weight,price,description;
+        Button rebutton;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             city = itemView.findViewById(R.id.cityname);
@@ -52,6 +56,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             weight = itemView.findViewById(R.id.weightvalue);
             price = itemView.findViewById(R.id.pricevalue);
             description = itemView.findViewById(R.id.description);
+            rebutton = itemView.findViewById(R.id.reserve_button);
+
+            rebutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent reserveIntent = new Intent(context, ReserveActivity.class);
+                    context.startActivity(reserveIntent);
+                }
+            });
 
         }
     }

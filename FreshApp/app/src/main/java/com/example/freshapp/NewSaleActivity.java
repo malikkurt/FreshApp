@@ -126,7 +126,6 @@ public class NewSaleActivity extends AppCompatActivity {
         userMap.put("weight",weight);
         userMap.put("price",price);
         userMap.put("description",description);
-
         Toast.makeText(getApplicationContext(),"Deneme2",Toast.LENGTH_SHORT).show();
         databaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
 
