@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
             Intent profileIntent = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(profileIntent);
         }
-        if(item.getItemId() == R.id.action_chat) {
-            Intent chatIntent = new Intent(MainActivity.this, ChatActivity.class);
-            startActivity(chatIntent);
+        if(item.getItemId() == R.id.action_shop){
+            Intent shopIntent = new Intent(MainActivity.this, ShopActivity.class);
+            startActivity(shopIntent);
         }
         if(item.getItemId() == R.id.action_newsale){
             Intent newSaleIntent = new Intent(MainActivity.this, NewSaleActivity.class);
