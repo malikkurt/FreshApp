@@ -9,23 +9,21 @@
     <item
         android:title="newsale"
         android:id="@+id/action_newsale"
-        android:icon="@drawable/ic_baseline_plus_one_24"
+        android:icon="@drawable/ic_baseline_add_box_24"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_home"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="action_home"
         app:showAsAction="always" />
+    <item android:title="Sale"
+        android:id="@+id/action_sale"
+        android:icon="@drawable/ic_baseline_feed_24"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/action_profile"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="Profil"
         app:showAsAction="always"
         android:layout_gravity="center"/>
-    <item
-        android:id="@+id/action_signout"
-        android:icon="@drawable/ic_baseline_exit_to_app_24"
-        android:title="SignOut"
-        app:showAsAction="always"
-        />
 </menu>
