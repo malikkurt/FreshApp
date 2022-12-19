@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
 
-    <item android:title="MySale"
-        android:icon="@drawable/ic_baseline_feed_24"
+    <item
         android:id="@+id/action_shop"
-        app:showAsAction="always"/>
+        android:icon="@drawable/ic_baseline_feed_24"
+        android:title="MySale"
+        app:showAsAction="always"
+
+        />
     <item
         android:title="newsale"
         android:id="@+id/action_newsale"
@@ -25,5 +29,5 @@
         android:icon="@drawable/ic_baseline_person_24"
         android:title="Profil"
         app:showAsAction="always"
-        android:layout_gravity="center"/>
+        />
 </menu>

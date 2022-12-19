@@ -2,19 +2,34 @@ package com.example.freshapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private androidx.appcompat.widget.Toolbar toolbar;
+    RecyclerView recyclerView;
+    ArrayList<Announcement> list;
+    DatabaseReference databaseReference;
+    FirebaseDatabase database;
+    AnnouncementAdapter adapter;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -59,6 +74,37 @@ public class MainActivity extends AppCompatActivity {
             startActivity(loginIntent);
             Toast.makeText(getApplicationContext(),"Giriş yapınız",Toast.LENGTH_SHORT).show();
         }
+        //Announcement
+
+        recyclerView = findViewById(R.id.announcementrecycle);
+
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("announcement");
+        list = new ArrayList<>();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new AnnouncementAdapter(this, list);
+        recyclerView.setAdapter(adapter);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+
+                    Announcement item = dataSnapshot.getValue(Announcement.class);
+                    list.add(item);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
 
 
     }

@@ -26,10 +26,6 @@ public class SaleActivity extends AppCompatActivity {
     ArrayList<Sales> list;
     DatabaseReference databaseReference;
     FirebaseDatabase database;
-
-
-
-
     MyAdapter adapter;
 
     @Override
@@ -51,7 +47,6 @@ public class SaleActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("Sales");
-
         list = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyAdapter(this, list);
@@ -71,7 +66,7 @@ public class SaleActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(),"Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         });
 

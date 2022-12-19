@@ -28,7 +28,7 @@ import java.util.List;
 
 public class NewSaleActivity extends AppCompatActivity {
 
-    private FirebaseAuth sAuth;
+    private FirebaseAuth mAuth;
     private Spinner newsaleSpinnerCity, newsaleSpinnerType;
     private DatabaseReference databaseReference;
     private List<String> names,types;
@@ -115,6 +115,8 @@ public class NewSaleActivity extends AppCompatActivity {
 
     }
 
+    String user_id = mAuth.getInstance().getCurrentUser().getUid();
+
     private void newsaleadd(String city, String type, String weight, String price, String description) {
 
         DatabaseReference newSaleRef = databaseReference.push();
@@ -126,7 +128,7 @@ public class NewSaleActivity extends AppCompatActivity {
         userMap.put("weight",weight);
         userMap.put("price",price);
         userMap.put("description",description);
-        Toast.makeText(getApplicationContext(),"Deneme2",Toast.LENGTH_SHORT).show();
+        userMap.put("user_id",user_id);
         databaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
 
             @Override

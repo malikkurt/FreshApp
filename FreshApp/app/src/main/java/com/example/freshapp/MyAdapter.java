@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
@@ -39,6 +40,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.weight.setText(user.getWeightvalue());
         holder.price.setText(user.getPricevalue());
         holder.description.setText(user.getDescription());
+
     }
 
     @Override
@@ -47,6 +49,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
+
         TextView city,type,weight,price,description;
         Button rebutton;
         public MyViewHolder(@NonNull View itemView) {
@@ -63,6 +66,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 public void onClick(View view) {
                     Intent reserveIntent = new Intent(context, ReserveActivity.class);
                     context.startActivity(reserveIntent);
+
+
                 }
             });
 

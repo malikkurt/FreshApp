@@ -5,6 +5,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class Sales {
+
     private String cityname;
     private String typename;
     private String weightvalue;
@@ -14,12 +15,13 @@ public class Sales {
     public Sales() {
     }
 
-    public Sales(String cityname, String typename, String weightvalue, String pricevalue, String description) {
+    public Sales(String cityname, String typename, String weightvalue, String pricevalue, String description,String sale_idname) {
         this.cityname = cityname;
         this.typename = typename;
         this.weightvalue = weightvalue;
         this.pricevalue = pricevalue;
         this.description = description;
+
     }
 
     public String getCityname() {
@@ -41,4 +43,6 @@ public class Sales {
     public String getDescription() {
         return description;
     }
+
+
 }
