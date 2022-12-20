@@ -1,4 +1,4 @@
-package com.example.freshapp;
+package com.example.freshapp.pages;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.freshapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +39,40 @@ public class NewSaleActivity extends AppCompatActivity {
     private EditText newsaleKg;
     private EditText newsalePrice;
     private EditText newsaleOpinion;
+    private androidx.appcompat.widget.Toolbar toolbar;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
+        super.onOptionsItemSelected(menuItem);
+        if(menuItem.getItemId() == R.id.action_mysale){
+            Intent myIntent = new Intent(NewSaleActivity.this, MySaleActivity.class);
+            startActivity(myIntent);
+        }
+        if(menuItem.getItemId() == R.id.action_newsale){
+            Intent newSaleIntent = new Intent(NewSaleActivity.this, NewSaleActivity.class);
+
+        }
+        if(menuItem.getItemId() ==R.id.action_home){
+            Intent homeIntent = new Intent(NewSaleActivity.this, MainActivity.class);
+            startActivity(homeIntent);
+        }
+        if(menuItem.getItemId() == R.id.action_sale){
+            Intent saleIntent = new Intent(NewSaleActivity.this, SaleActivity.class);
+            startActivity(saleIntent);
+        }
+        if(menuItem.getItemId() == R.id.action_profile) {
+            Intent profileIntent = new Intent(NewSaleActivity.this, ProfileActivity.class);
+            startActivity(profileIntent);
+        }
+        return true;
+    }
 
 
 
@@ -54,6 +91,8 @@ public class NewSaleActivity extends AppCompatActivity {
         newsalePrice = (EditText) findViewById(R.id.newsale_price);
         newsaleOpinion = (EditText) findViewById(R.id.newsale_opininon);
 
+        toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.mainToolbar);
+        setSupportActionBar(toolbar);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("spinner").addValueEventListener(new ValueEventListener() {
@@ -115,6 +154,8 @@ public class NewSaleActivity extends AppCompatActivity {
 
     }
 
+
+
     String user_id = mAuth.getInstance().getCurrentUser().getUid();
 
     private void newsaleadd(String city, String type, String weight, String price, String description) {
@@ -129,6 +170,8 @@ public class NewSaleActivity extends AppCompatActivity {
         userMap.put("price",price);
         userMap.put("description",description);
         userMap.put("user_id",user_id);
+        userMap.put("sale_id",sale_id);
+
         databaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
 
             @Override

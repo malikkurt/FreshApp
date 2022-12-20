@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center"
     >
 
+
     <item
-        android:id="@+id/action_shop"
+        android:id="@+id/action_mysale"
         android:icon="@drawable/ic_baseline_feed_24"
         android:title="MySale"
-        app:showAsAction="always"
-
-        />
+        app:showAsAction="always" />
     <item
         android:title="newsale"
         android:id="@+id/action_newsale"

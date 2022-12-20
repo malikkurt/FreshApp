@@ -1,6 +1,5 @@
 package com.example.freshapp;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -12,7 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.BreakIterator;
+import com.example.freshapp.pages.ReserveActivity;
+
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
@@ -35,11 +35,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Sales user = list.get(position);
-        holder.city.setText(user.getCityname());
-        holder.type.setText(user.getTypename());
-        holder.weight.setText(user.getWeightvalue());
-        holder.price.setText(user.getPricevalue());
+        holder.city.setText(user.getCity());
+        holder.type.setText(user.getType());
+        holder.weight.setText(user.getWeight());
+        holder.price.setText(user.getPrice());
         holder.description.setText(user.getDescription());
+        holder.sale_id.setText(user.getSale_id());
+        holder.user_id.setText(user.getUser_id());
+
 
     }
 
@@ -50,8 +53,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView city,type,weight,price,description;
+        TextView city,type,weight,price,description,sale_id,user_id;
         Button rebutton;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             city = itemView.findViewById(R.id.cityname);
@@ -59,12 +63,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             weight = itemView.findViewById(R.id.weightvalue);
             price = itemView.findViewById(R.id.pricevalue);
             description = itemView.findViewById(R.id.description);
+            sale_id = itemView.findViewById(R.id.saleId);
+            user_id = itemView.findViewById(R.id.userid);
+
             rebutton = itemView.findViewById(R.id.reserve_button);
 
             rebutton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent reserveIntent = new Intent(context, ReserveActivity.class);
+                    reserveIntent.putExtra("sale_id",sale_id.getText()).toString();
                     context.startActivity(reserveIntent);
 
 

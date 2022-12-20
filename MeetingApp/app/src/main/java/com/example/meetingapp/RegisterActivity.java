@@ -1,4 +1,4 @@
-package com.example.freshapp;
+package com.example.meetingapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,10 +30,12 @@ public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         registerButton = (Button) findViewById(R.id.register_button);
         registerEmail = (EditText) findViewById(R.id.register_email);
         registerName = (EditText) findViewById(R.id.register_name);
@@ -52,27 +53,32 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = registerPassword.getText().toString();
                 String phone = registerPhone.getText().toString();
 
-
                 if(!TextUtils.isEmpty(name) || !TextUtils.isEmpty(password) || !TextUtils.isEmpty(email) || !TextUtils.isEmpty(phone)){
 
                     register_user(name,password,email,phone);
 
                 }
-            }
 
+
+            }
         });
+
+
+
     }
 
     private void register_user(String name, String password, String email, String phone) {
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(task -> {
+
 
             if(task.isSuccessful()){
                 String user_id = mAuth.getCurrentUser().getUid();
                 mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
                 HashMap<String,String> userMap = new HashMap<>();
                 userMap.put("name",name);
-                userMap.put("Email",email);
+                userMap.put("email",email);
                 userMap.put("phone",phone);
+
 
                 mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -83,12 +89,19 @@ public class RegisterActivity extends AppCompatActivity {
                             Intent mainIntent=new Intent(RegisterActivity.this, MainActivity.class);
                             startActivity(mainIntent);
                         }
+
                     }
                 });
             }
             else{
                 Toast.makeText(getApplicationContext(),"Hata"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+
+
+
+
+            });
+
+
     }
 }
