@@ -35,11 +35,9 @@ public class NewSaleActivity extends AppCompatActivity {
     private Spinner newsaleSpinnerCity, newsaleSpinnerType;
     private DatabaseReference databaseReference;
     private List<String> names,types;
-    private Button newsaleButton;
     private EditText newsaleKg;
     private EditText newsalePrice;
     private EditText newsaleOpinion;
-    private androidx.appcompat.widget.Toolbar toolbar;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,12 +84,12 @@ public class NewSaleActivity extends AppCompatActivity {
         newsaleSpinnerType = findViewById(R.id.newsale_spinner_type);
         types = new ArrayList<>();
 
-        newsaleButton = (Button) findViewById(R.id.newsale_button);
-        newsaleKg = (EditText) findViewById(R.id.newsale_kg);
-        newsalePrice = (EditText) findViewById(R.id.newsale_price);
-        newsaleOpinion = (EditText) findViewById(R.id.newsale_opininon);
+        Button newsaleButton = findViewById(R.id.newsale_button);
+        newsaleKg = findViewById(R.id.newsale_kg);
+        newsalePrice = findViewById(R.id.newsale_price);
+        newsaleOpinion = findViewById(R.id.newsale_opininon);
 
-        toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.mainToolbar);
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.mainToolbar);
         setSupportActionBar(toolbar);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -135,21 +133,18 @@ public class NewSaleActivity extends AppCompatActivity {
 
             }
         });
-        newsaleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String city = newsaleSpinnerCity.getSelectedItem().toString();
-                String type = newsaleSpinnerType.getSelectedItem().toString();
-                String weight = newsaleKg.getText().toString();
-                String price = newsalePrice.getText().toString();
-                String description = newsaleOpinion.getText().toString();
+        newsaleButton.setOnClickListener(view -> {
+            String city = newsaleSpinnerCity.getSelectedItem().toString();
+            String type = newsaleSpinnerType.getSelectedItem().toString();
+            String weight = newsaleKg.getText().toString();
+            String price = newsalePrice.getText().toString();
+            String description = newsaleOpinion.getText().toString();
 
-                if(!TextUtils.isEmpty(city) || !TextUtils.isEmpty(type) || !TextUtils.isEmpty(weight) || !TextUtils.isEmpty(price) || !TextUtils.isEmpty(description)){
+            if(!TextUtils.isEmpty(city) || !TextUtils.isEmpty(type) || !TextUtils.isEmpty(weight) || !TextUtils.isEmpty(price) || !TextUtils.isEmpty(description)){
 
-                    newsaleadd(city,type,weight,price,description);
-                }
-
+                newsaleadd(city,type,weight,price,description);
             }
+
         });
 
     }
@@ -172,15 +167,11 @@ public class NewSaleActivity extends AppCompatActivity {
         userMap.put("user_id",user_id);
         userMap.put("sale_id",sale_id);
 
-        databaseReference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(getApplicationContext(),"Satışa eklendi",Toast.LENGTH_SHORT).show();
-                    Intent saleIntent = new Intent(NewSaleActivity.this, SaleActivity.class);
-                    startActivity(saleIntent);
-                }
+        databaseReference.setValue(userMap).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                Toast.makeText(getApplicationContext(),"Satışa eklendi",Toast.LENGTH_SHORT).show();
+                Intent saleIntent = new Intent(NewSaleActivity.this, SaleActivity.class);
+                startActivity(saleIntent);
             }
         });
 

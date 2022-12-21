@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">FreshApp</string>
+    <string name="hosgeldın">Hoşgeldiniz</string>
+    <string name="login">Henüz üye değil misin?</string>
+    <string name="register">Merhabalar</string>
+    <string name="reserveinfo">Rezervasyon</string>
+    <string name="reserveinfo_2">Rezervasyonu onaylarsanız sizler için satıcı ile iletişime geçilecek,
+        satış kabul edilirse satıcının bilgileri tarafınıza iletilecektir</string>
 
 
 </resources>

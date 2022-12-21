@@ -25,13 +25,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
-    private androidx.appcompat.widget.Toolbar toolbar;
-    private RecyclerView recyclerView;
     private ArrayList<Announcement> list;
-    private DatabaseReference databaseReference;
-    private FirebaseDatabase database;
-    private AnnouncementAdapter adapter;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mAuth = FirebaseAuth.getInstance();
-        toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.mainToolbar);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.mainToolbar);
         setSupportActionBar(toolbar);
 
         if ( mAuth.getCurrentUser()==null){
@@ -80,13 +74,13 @@ public class MainActivity extends AppCompatActivity {
         }
         //Announcement
 
-        recyclerView = findViewById(R.id.announcementrecycle);
+        RecyclerView recyclerView = findViewById(R.id.announcementrecycle);
 
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("announcement");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference("announcement");
         list = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AnnouncementAdapter(this, list);
+        AnnouncementAdapter adapter = new AnnouncementAdapter(this, list);
         recyclerView.setAdapter(adapter);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -97,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
                     Announcement item = dataSnapshot.getValue(Announcement.class);
                     list.add(item);
                 }
-                adapter.notifyDataSetChanged();
             }
 
             @Override

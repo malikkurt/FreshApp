@@ -1,73 +1,59 @@
 package com.example.freshapp.pages;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.freshapp.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
+
     private EditText loginEmail;
     private EditText loginPassword;
-    private Button loginButton;
-    private Button loginRegisterto;
     private FirebaseAuth mAuth;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginPassword = (EditText) findViewById(R.id.login_password);
-        loginEmail = (EditText) findViewById(R.id.login_email);
-        loginButton = (Button) findViewById(R.id.login_button);
-        loginRegisterto = (Button) findViewById(R.id.register_to_button);
+
+        loginPassword = findViewById(R.id.login_password);
+        loginEmail = findViewById(R.id.login_email);
+        Button loginButton = findViewById(R.id.login_button);
+        TextView loginRegisterto = findViewById(R.id.register_to_button);
         mAuth = FirebaseAuth.getInstance();
 
-        loginRegisterto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(registerIntent);
-            }
+        loginRegisterto.setOnClickListener(view -> {
+            Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(registerIntent);
         });
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = loginEmail.getText().toString();
-                String password = loginPassword.getText().toString();
-                if(!TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)){
-                    LoginUser(email,password);
-                }
+        loginButton.setOnClickListener(view -> {
+            String email = loginEmail.getText().toString();
+            String password = loginPassword.getText().toString();
+            if(!TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)){
+                LoginUser(email,password);
             }
         });
     }
 
     private void LoginUser(String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
 
-                if (task.isSuccessful()){
-                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(mainIntent);
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),"Giriş yapılamadı",Toast.LENGTH_SHORT).show();
-                }
+            if (task.isSuccessful()){
+                Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                Toast.makeText(getApplicationContext(),"Giriş yapıldı",Toast.LENGTH_SHORT).show();
+                startActivity(mainIntent);
+            }
+            else{
+                Toast.makeText(getApplicationContext(),"Giriş yapılamadı",Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }

@@ -30,8 +30,6 @@ public class MySaleActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     FirebaseDatabase database;
     MyAdapter adapter;
-    private FirebaseAuth mAuth;
-    private androidx.appcompat.widget.Toolbar toolbar;
 
 
     @Override
@@ -83,10 +81,10 @@ public class MySaleActivity extends AppCompatActivity {
         adapter = new MyAdapter(this, list);
         recyclerView.setAdapter(adapter);
 
-        toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.mainToolbar);
+        androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.mainToolbar);
         setSupportActionBar(toolbar);
 
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String currentUser_id = mAuth.getCurrentUser().getUid();
 
         databaseReference.addValueEventListener(new ValueEventListener() {

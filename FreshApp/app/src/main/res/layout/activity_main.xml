@@ -8,6 +8,9 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:gravity="center"
+        android:paddingTop="20dp"
         android:text="Duyurular"
         android:textSize="25dp" />
 
