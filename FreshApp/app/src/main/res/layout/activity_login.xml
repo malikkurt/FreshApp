@@ -1,29 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_login1"
     tools:context=".pages.LoginActivity">
+
+    <TextView
+        android:id="@+id/login_appname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+
+        android:text="FreshApp"
+        android:textColor="#E8E4D3"
+        android:textSize="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/login_hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="sans-serif-condensed-medium"
+        android:padding="7dp"
         android:text="@string/hosgeldın"
+        android:textColor="#FEFCF3"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/login_appname" />
 
     <EditText
         android:id="@+id/login_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:ems="10"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/shape_edittext01"
+        android:ems="13"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
@@ -35,8 +52,9 @@
         android:id="@+id/login_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:ems="10"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_edittext01"
+        android:ems="13"
         android:hint="Şifre"
         android:inputType="textPassword"
         android:minHeight="48dp"
@@ -48,9 +66,11 @@
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
+
         android:fontFamily="sans-serif-condensed-medium"
         android:text="Giriş Yap"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_password" />
@@ -59,12 +79,14 @@
         android:id="@+id/register_to_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:clickable="true"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="@string/login"
+        android:textColor="#FEFCF3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
